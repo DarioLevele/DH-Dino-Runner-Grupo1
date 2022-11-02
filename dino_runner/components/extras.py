@@ -6,7 +6,6 @@ from dino_runner.utils.constants import SCREEN_HEIGHT, SCREEN_WIDTH
 class Extra(Sprite):
     def __init__(self):
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        self.screen.fill((255, 255, 255))
 
     def vida_3_coras(self, number_of_lives, corazon, game_over):
         if number_of_lives == 3:
