@@ -1,9 +1,9 @@
 import pygame
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.extras import Extra
-
+from dino_runner.components.obstacles.obstacle_handler import ObstacleHandler
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, HEART, GAME_OVER
-from components.obstacles.obstacle_handler import ObstacleHandler
+
 
 
 class Game:
