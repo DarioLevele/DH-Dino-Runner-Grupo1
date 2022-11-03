@@ -2,7 +2,8 @@ import pygame
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.extras import Extra
 from dino_runner.components.obstacles.obstacle_handler import ObstacleHandler
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, HEART, GAME_OVER
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, HEART, GAME_OVER,CLOUD
+from dino_runner.utils import text_utils
 
 
 
@@ -21,6 +22,7 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.lives = 3    # Mientras tanto :)
+        self.points = 0
 
     def run(self):
         # Game loop: events - update - draw
@@ -48,6 +50,7 @@ class Game:
         self.dinosaur.draw(self.screen)
         self.obstacle_handler.draw(self.screen)
         self.vidas.vida_3_coras(self.lives, HEART, GAME_OVER)
+        self.draw_score()
         pygame.display.update()
         pygame.display.flip()
 
@@ -59,3 +62,9 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+
+    def draw_score(self):
+        self.points += 1
+        message = "Points: " + str(self.points)
+        points_text, points_rect = text_utils.get_text_element(message, SCREEN_WIDTH - 135, 20)
+        self.screen.blit(points_text, points_rect)

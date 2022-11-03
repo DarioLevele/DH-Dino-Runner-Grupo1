@@ -3,10 +3,12 @@ import pygame
 import random
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
+from dino_runner.components.dinosaur import Dinosaur
 
 class ObstacleHandler():
     def __init__(self):
         self.obstacles = []
+        self.xd = Dinosaur()
 
     def update(self, speed, dino):
         if len(self.obstacles) == 0:
@@ -19,6 +21,7 @@ class ObstacleHandler():
         for obstacle in self.obstacles:
             obstacle.update(speed)
             if dino.image_rect.colliderect(obstacle.image_rect):
+                self.xd.dino_dead()
                 pygame.time.delay(300)
                 self.obstacles.pop()
             if obstacle.image_rect.x < -obstacle.image_rect.width:
