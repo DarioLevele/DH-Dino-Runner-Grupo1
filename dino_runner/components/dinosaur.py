@@ -1,7 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 
-from dino_runner.utils.constants import JUMPING, RUNNING, DUCKING, DEAD
+from dino_runner.utils.constants import JUMPING, RUNNING, DUCKING, DEAD, SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Dinosaur(Sprite):
     DINO_X_POS = 50
@@ -21,6 +21,9 @@ class Dinosaur(Sprite):
         self.dino_run = True
         self.dino_duck = False
         self.dino_velocity = self.INITIAL_VELOCITY
+        self.papa = ""
+        self.ntp = 0
+        
 
     def update(self, dino_event):
         if self.dino_jump:
@@ -71,13 +74,18 @@ class Dinosaur(Sprite):
             self.dino_jump = False
             self.dino_velocity = self.INITIAL_VELOCITY
             self.dino_run = True
-    def dino_dead(self):
+    def dead(self):
         print("muerto")
-        self.dino_run = False
+        self.papa = "sd"
         self.image =  DEAD
         self.image_rect = self.image.get_rect()
         self.image_rect.x = self.DINO_X_POS
         self.image_rect.y = self.DINO_Y_POS
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.draw(self.screen)
 
     def draw(self, screen):
         screen.blit(self.image, (self.image_rect.x, self.image_rect.y))
+        if self.papa == "sd":
+            self.ntp +=1
+            print("dibuja muerto", self.ntp)

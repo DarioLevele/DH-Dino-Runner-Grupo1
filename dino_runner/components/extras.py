@@ -19,6 +19,7 @@ class Extra(Sprite):
             self.draw(corazon, 970, 50)
         else: 
             self.draw(game_over, 380, 200)
+            pygame.time.delay(1000)
             
 
     def draw(self, imagen, position_x, position_y):

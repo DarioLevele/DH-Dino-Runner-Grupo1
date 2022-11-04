@@ -75,3 +75,7 @@ DEAD = pygame.image.load(os.path.join(IMG_DIR, 'Dino/DinoDead.png'))
 
 DEFAULT_TYPE = "default"
 
+
+# SOUND
+
+#BASE = pygame.mixer.Sound(os.path.join(IMG_DIR, 'Sound/GIGA.mp3'))
