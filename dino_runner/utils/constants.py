@@ -18,8 +18,7 @@ RUNNING = [
 
 RUNNING_SHIELD = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1Shield.png")),
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
-]
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2Shield.png"))]
 
 RUNNING_HAMMER = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1Hammer.png")),
@@ -37,7 +36,7 @@ DUCKING = [
 
 DUCKING_SHIELD = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1Shield.png")),
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2Shield.png")),
 ]
 
 DUCKING_HAMMER = [
@@ -62,7 +61,7 @@ BIRD = [
 ]
 
 CLOUD = pygame.image.load(os.path.join(IMG_DIR, 'Other/Cloud.png'))
-SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
+SHIELD = [pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))]
 HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
 
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
@@ -73,8 +72,19 @@ GAME_OVER = pygame.image.load(os.path.join(IMG_DIR, 'Other/GameOver.png'))
 
 DEAD = pygame.image.load(os.path.join(IMG_DIR, 'Dino/DinoDead.png'))
 
+FONT_STYLE = "freesansbold.ttf"
+
+SHIELD_TYPE = "shield"
+DEFAULT_TYPE = "default"
+HAMMER_TYPE = " hammer"
+
 DEFAULT_TYPE = "default"
 
+FONDO_INICIO = pygame.image.load(os.path.join(IMG_DIR, 'Other/FONDOINIT.png'))
+FONDO_GAME_OVER = pygame.image.load(os.path.join(IMG_DIR, 'Other/FONDOGAMEOVER.png'))
+
+HEART_RED = [pygame.image.load(os.path.join(IMG_DIR, 'Other/heart.png'))]
+COIN = [pygame.image.load(os.path.join(IMG_DIR, 'Other/coin.png'))]
 
 # SOUND
 

@@ -1,8 +1,9 @@
 import pygame
+import random
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.extras import Extra
 from dino_runner.components.obstacles.obstacle_handler import ObstacleHandler
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, HEART, GAME_OVER,CLOUD
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONDO_INICIO, FONDO_GAME_OVER, CLOUD
 from dino_runner.utils import text_utils
 
 
@@ -25,15 +26,16 @@ class Game:
         self.y_pos_bg = 380
         self.lives = self.MAX_LIVE    # Mientras tanto :)
         self.points = 0
-        #self.music = pygame.mixer.Sound("dino_runner/assets/Sound/GIGA.mp3")
-    
+        self.shields = 0
+        self.wrd_color = (0, 0, 0)
+        self.bg_color = (255, 255, 255)
+
     def execute(self):
         while self.running:
             if not self.playing:
                 self.show_menu()
 
     def run(self):
-        #self.music.play()
         # Game loop: events - update - draw
         self.reset_attributes()
         self.playing = True
@@ -46,10 +48,12 @@ class Game:
     def reset_attributes(self):
         self.playing = True
         self.dinosaur = Dinosaur()
-        self.obstacle_handler = ObstacleHandler()
         self.vidas = Extra()
         self.points = 0
+        self.game_speed = 20
         self.lives = self.MAX_LIVE
+        self.shields = 1
+
 
     def events(self):
         for event in pygame.event.get():
@@ -61,6 +65,7 @@ class Game:
         self.dinosaur.update(dino_event)
         self.obstacle_handler.update(self)
         self.update_score()
+        
 
         if self.lives == 0:
             self.playing = False
@@ -69,11 +74,12 @@ class Game:
 
     def draw(self):
         self.clock.tick(FPS)
-        self.screen.fill((255, 255, 255))
+        bg_color = (255, 255, 255) if self.points // 600 != 1 else (0,0,0)
+        self.screen.fill(bg_color)
         self.draw_background()
         self.dinosaur.draw(self.screen)
         self.obstacle_handler.draw(self.screen)
-        self.vidas.vida_3_coras(self.lives, HEART, GAME_OVER)
+        self.vidas.vida_3_coras(self.lives)
         self.draw_score()
         pygame.display.update()
         pygame.display.flip()
@@ -86,23 +92,25 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+    
+
 
     def draw_score(self):
+        wrd_color = (0,0,0) if self.points // 600 != 1 else (255, 255, 255)
         self.points += 1
         message = "Points: " + str(self.points)
-        points_text, points_rect = text_utils.get_text_element(message, SCREEN_WIDTH - 135, 20)
+        points_text, points_rect = text_utils.get_text_element(message, SCREEN_WIDTH - 135, 20, font_color=wrd_color)
         self.screen.blit(points_text, points_rect)
 
     def update_score(self):
-        self.points += 1
+        #self.points += 1
         if self.points % 100 == 0:
             self.game_speed += 2
 
     def show_menu(self):
         self.running = True
 
-        black_color = (0, 0, 0)
-        self.screen.fill(black_color)
+        self.screen.fill(self.bg_color)
         self.show_menu_options()
 
         pygame.display.update()
@@ -118,9 +126,11 @@ class Game:
                 self.run()
     
     def show_menu_options(self):
-        white_color = (255, 255, 255)
+        red_color = (255, 0, 0)
         if self.points > 0:
-            text, text_rect = text_utils.get_text_element("GAME OVER!", font_size=40, font_color=white_color)
+            self.screen.blit(FONDO_GAME_OVER, (0, 0))
+            text, text_rect = text_utils.get_text_element("Press any key to start again",pos_x=150, pos_y=400 ,font_size=60, font_color=red_color)
         else:
-            text, text_rect = text_utils.get_text_element("Press any key to Start", font_size=40, font_color=white_color)
+            self.screen.blit(FONDO_INICIO, (0, 0))
+            text, text_rect = text_utils.get_text_element("Press any key to Start",pos_x = 230, pos_y = 360, font_size=60, font_color=red_color)
         self.screen.blit(text, text_rect)
