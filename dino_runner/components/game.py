@@ -26,6 +26,7 @@ class Game:
         self.y_pos_bg = 380
         self.lives = self.MAX_LIVE    # Mientras tanto :)
         self.points = 0
+        self.score_hight = 0
         self.shields = 0
         self.wrd_color = (0, 0, 0)
         self.bg_color = (255, 255, 255)
@@ -101,11 +102,17 @@ class Game:
         message = "Points: " + str(self.points)
         points_text, points_rect = text_utils.get_text_element(message, SCREEN_WIDTH - 135, 20, font_color=wrd_color)
         self.screen.blit(points_text, points_rect)
+        if self.points > self.score_hight:
+            self.score_hight = self.points
+        message_2 = "Highest score:" + str(self.score_hight)
+        points_text, points_rect = text_utils.get_text_element(message_2, SCREEN_WIDTH - 135, 20, font_color=wrd_color)
+        self.screen.blit(points_text, (50,25))
 
     def update_score(self):
         #self.points += 1
         if self.points % 100 == 0:
             self.game_speed += 2
+        
 
     def show_menu(self):
         self.running = True
@@ -130,6 +137,8 @@ class Game:
         if self.points > 0:
             self.screen.blit(FONDO_GAME_OVER, (0, 0))
             text, text_rect = text_utils.get_text_element("Press any key to start again",pos_x=150, pos_y=400 ,font_size=60, font_color=red_color)
+            self.screen.blit(text, text_rect)
+            text, text_rect = text_utils.get_text_element("Highest score:"+ str(self.score_hight) ,pos_x = 400, pos_y = 470, font_size=30, font_color=(0,255,0))
         else:
             self.screen.blit(FONDO_INICIO, (0, 0))
             text, text_rect = text_utils.get_text_element("Press any key to Start",pos_x = 230, pos_y = 360, font_size=60, font_color=red_color)

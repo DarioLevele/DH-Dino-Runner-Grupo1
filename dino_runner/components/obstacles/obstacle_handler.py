@@ -22,10 +22,7 @@ class ObstacleHandler():
     def update(self, game):
         self.mesage_obs = SHIELD_TYPE
         if len(self.obstacles) == 0:
-            self.how_often_shield = game.points % 500
             self.obstacle_type = random.randint(0,random.randint(1,4))
-
-            
             if self.obstacle_type == 2:
                 self.obstacles.append(Power_shield(SHIELD))
             elif self.obstacle_type == 0:
@@ -61,6 +58,7 @@ class ObstacleHandler():
                 game.lives -= 1
                 pygame.time.delay(300)
                 self.obstacles.pop()
+                
             if obstacle.image_rect.x < -obstacle.image_rect.width:
                 self.obstacles.pop()
             
